@@ -6,6 +6,7 @@
   <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Emoji_u1f60a.svg/240px-Emoji_u1f60a.svg.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+    /* Всё оформление — без изменений */
     body::before {
       content: "";
       position: fixed;
@@ -17,13 +18,7 @@
       animation: gradientFlow 15s ease infinite;
       z-index: -2;
     }
-
-    @keyframes gradientFlow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
+    @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -32,135 +27,72 @@
       background-color: #0f0f0f;
       overflow: hidden;
     }
-
     .stars {
       position: fixed;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       pointer-events: none;
       z-index: -1;
     }
-
     .star {
       position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      opacity: 0.8;
+      width: 2px; height: 2px;
+      background: white; opacity: 0.8;
       box-shadow: 0 0 4px white;
       animation: fall linear infinite;
     }
-
     @keyframes fall {
-      0% {
-        transform: translateY(-10px);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
+      0% { transform: translateY(-10px); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
     }
-
     .container {
       background-color: rgba(0, 0, 0, 0.7);
-      padding: 50px;
-      margin: 50px auto;
-      max-width: 600px;
-      border-radius: 10px;
+      padding: 50px; margin: 50px auto;
+      max-width: 600px; border-radius: 10px;
       animation: fadeIn 1s ease-out;
     }
-
-    h1 {
-      font-size: 32px;
-      text-shadow: 0 0 10px #7289da;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    li {
-      margin: 10px 0;
-      font-size: 18px;
-    }
-
+    h1 { font-size: 32px; text-shadow: 0 0 10px #7289da; }
+    ul { list-style: none; padding: 0; }
+    li { margin: 10px 0; font-size: 18px; }
     .emoji-block {
-      display: inline-block;
-      vertical-align: middle;
-      width: 24px;
-      height: 24px;
+      display: inline-block; vertical-align: middle;
+      width: 24px; height: 24px;
       background-image: url('https://emoji.gg/assets/emoji/28993_mc_grass_block.png');
-      background-size: cover;
-      margin-right: 8px;
+      background-size: cover; margin-right: 8px;
     }
-
     .btn-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 30px;
+      display: flex; flex-direction: row;
+      justify-content: center; gap: 20px;
+      flex-wrap: wrap; margin-top: 30px;
     }
-
     .glow-button {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border: none;
-      padding: 12px 24px;
-      font-size: 18px;
-      border-radius: 6px;
+      display: flex; align-items: center; gap: 10px;
+      border: none; padding: 12px 24px;
+      font-size: 18px; border-radius: 6px;
       cursor: pointer;
       transition: box-shadow 0.3s ease, transform 0.3s ease;
       animation: slideUp 0.8s ease-out;
     }
-
     .glow-button:hover {
       box-shadow: 0 0 15px currentColor;
       transform: scale(1.05);
     }
-
-    .discord {
-      background-color: #7289da;
-      color: white;
-    }
-
-    .twitch {
-      background-color: #9146FF;
-      color: white;
-    }
-
-    .icon {
-      width: 24px;
-      height: 24px;
-      border-radius: 4px;
-    }
-
+    .discord { background-color: #7289da; color: white; }
+    .twitch { background-color: #9146FF; color: white; }
+    .icon { width: 24px; height: 24px; border-radius: 4px; }
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+      to   { opacity: 1; transform: scale(1); }
     }
-
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-
     @media (max-width: 600px) {
-      .container {
-        padding: 30px;
-        margin: 20px;
-      }
+      .container { padding: 30px; margin: 20px; }
       .glow-button {
-        width: 100%;
-        font-size: 20px;
+        width: 100%; font-size: 20px;
         justify-content: center;
       }
       .btn-container {
@@ -171,9 +103,7 @@
   </style>
 </head>
 <body>
-  <!-- Звёзды -->
   <div class="stars" id="stars"></div>
-
   <div class="container">
     <h1>Добро пожаловать на сервер!</h1>
     <p>Для оплаты проходки на наш сервер по выживанию воспользуйтесь реквизитами ниже:</p>
@@ -181,20 +111,23 @@
       <li><span class="emoji-block"></span>Halyk Bank: 1234 5678 9012 3456</li>
     </ul>
     <div class="btn-container">
-      <button class="glow-button discord" onclick="window.open('https://discord.gg/qUA56D8RUN', '_blank')">
+      <button class="glow-button discord" onclick="playSound(); window.open('https://discord.gg/qUA56D8RUN', '_blank')">
         <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" class="icon">
         Войти в Discord
       </button>
-      <button class="glow-button twitch" onclick="window.open('https://www.twitch.tv/smile_ik10/', '_blank')">
+      <button class="glow-button twitch" onclick="playSound(); window.open('https://www.twitch.tv/smile_ik10/', '_blank')">
         <img src="https://img.freepik.com/premium-vector/twitch-app-icon-interactive-livestreaming-service-gaming-social-media_277909-496.jpg" alt="Twitch" class="icon">
         Перейти на Twitch
       </button>
     </div>
   </div>
 
-  <script>
-    const starsContainer = document.getElementById('stars');
+  <!-- 🔊 Аудиофайл -->
+  <audio id="clickSound" src="sounds/click.mp3"></audio>
 
+  <script>
+    // Звёзды
+    const starsContainer = document.getElementById('stars');
     function createStar() {
       const star = document.createElement('div');
       star.classList.add('star');
@@ -202,15 +135,18 @@
       star.style.animationDuration = 2 + Math.random() * 3 + 's';
       star.style.opacity = Math.random();
       star.style.width = star.style.height = Math.random() > 0.5 ? '2px' : '1px';
-
       starsContainer.appendChild(star);
-
-      setTimeout(() => {
-        star.remove();
-      }, 5000);
+      setTimeout(() => star.remove(), 5000);
     }
-
     setInterval(createStar, 100);
+
+    // 🔊 Воспроизведение звука
+    function playSound() {
+      const sound = document.getElementById('clickSound');
+      sound.currentTime = 0;
+      sound.play();
+    }
   </script>
 </body>
 </html>
+
