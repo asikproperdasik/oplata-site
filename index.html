@@ -80,6 +80,15 @@
     }
     .discord { background-color: #7289da; color: white; }
     .twitch { background-color: #9146FF; color: white; }
+    .donate {
+  background-color: #FFD700;
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 0 10px #FFD700;
+}
+.donate:hover {
+  box-shadow: 0 0 20px #FFD700, 0 0 10px #fff;
+}
     .icon { width: 24px; height: 24px; border-radius: 4px; }
     @keyframes fadeIn {
       from { opacity: 0; transform: scale(0.95); }
@@ -107,9 +116,6 @@
   <div class="container">
     <h1>Добро пожаловать на сервер!</h1>
     <p>Для оплаты проходки на наш сервер по выживанию воспользуйтесь ссылкой ниже:</p>
-    <ul>
-      <li><span class="emoji-block"></span>https://www.donationalerts.com/r/smile_ik10</li>
-    </ul>
     <div class="btn-container">
       <button class="glow-button discord" onclick="playSound(); window.open('https://discord.gg/qUA56D8RUN', '_blank')">
         <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" class="icon">
@@ -119,6 +125,10 @@
         <img src="https://img.freepik.com/premium-vector/twitch-app-icon-interactive-livestreaming-service-gaming-social-media_277909-496.jpg" alt="Twitch" class="icon">
         Перейти на Twitch
       </button>
+     <button class="glow-button donate" onclick="playSound(); window.open('https://www.donationalerts.com/r/smile_ik10', '_blank')">
+  <img src="https://cdn-icons-png.flaticon.com/512/2163/2163350.png" alt="Coins" class="icon">
+  Оплатить проходку
+</button>
     </div>
   </div>
 
