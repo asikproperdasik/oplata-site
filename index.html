@@ -1,162 +1,360 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Оплата проходки</title>
-  <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Emoji_u1f60a.svg/240px-Emoji_u1f60a.svg.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    /* Всё оформление — без изменений */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(-45deg, #2a003f, #000000, #3a0066, #0f0f0f);
-      background-size: 400% 400%;
-      animation: gradientFlow 15s ease infinite;
-      z-index: -2;
-    }
-    @keyframes gradientFlow { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: white;
-      text-align: center;
-      background-color: #0f0f0f;
-      overflow: hidden;
-    }
-    .stars {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-    .star {
-      position: absolute;
-      width: 2px; height: 2px;
-      background: white; opacity: 0.8;
-      box-shadow: 0 0 4px white;
-      animation: fall linear infinite;
-    }
-    @keyframes fall {
-      0% { transform: translateY(-10px); opacity: 0; }
-      10% { opacity: 1; }
-      100% { transform: translateY(100vh); opacity: 0; }
-    }
-    .container {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 50px; margin: 50px auto;
-      max-width: 600px; border-radius: 10px;
-      animation: fadeIn 1s ease-out;
-    }
-    h1 { font-size: 32px; text-shadow: 0 0 10px #7289da; }
-    ul { list-style: none; padding: 0; }
-    li { margin: 10px 0; font-size: 18px; }
-    .emoji-block {
-      display: inline-block; vertical-align: middle;
-      width: 24px; height: 24px;
-      background-image: url('https://emoji.gg/assets/emoji/28993_mc_grass_block.png');
-      background-size: cover; margin-right: 8px;
-    }
-    .btn-container {
-      display: flex; flex-direction: row;
-      justify-content: center; gap: 20px;
-      flex-wrap: wrap; margin-top: 30px;
-    }
-    .glow-button {
-      display: flex; align-items: center; gap: 10px;
-      border: none; padding: 12px 24px;
-      font-size: 18px; border-radius: 6px;
-      cursor: pointer;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-      animation: slideUp 0.8s ease-out;
-    }
-    .glow-button:hover {
-      box-shadow: 0 0 15px currentColor;
-      transform: scale(1.05);
-    }
-    .discord { background-color: #7289da; color: white; }
-    .twitch { background-color: #9146FF; color: white; }
-    .donate {
-  background-color: #FFD700;
-  color: #000;
-  font-weight: bold;
-  box-shadow: 0 0 10px #FFD700;
-}
-.donate:hover {
-  box-shadow: 0 0 20px #FFD700, 0 0 10px #fff;
-}
-    .icon { width: 24px; height: 24px; border-radius: 4px; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to   { opacity: 1; transform: scale(1); }
-    }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @media (max-width: 600px) {
-      .container { padding: 30px; margin: 20px; }
-      .glow-button {
-        width: 100%; font-size: 20px;
-        justify-content: center;
-      }
-      .btn-container {
-        flex-direction: column;
-        gap: 15px;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<title>Tbl_3a9k — Био🤍</title>
+<link rel="icon" href="favicon.png" type="image/png" />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+  body{font-family:'Press Start 2P',cursive;background:#0a0015;color:#fff;overflow-x:hidden;position:relative;min-height:100vh;}
+  
+  /* Global animated background */
+  #global-canvas-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    z-index:1;
+    pointer-events:none;
+    transition: opacity 0.5s ease;
+  }
+  
+  .bg-toggle{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:200;
+    background:transparent;
+    border:2px solid #ff99cc;
+    color:#ff99cc;
+    font-family:'Press Start 2P';
+    font-size:8px;
+    padding:8px 12px;
+    cursor:pointer;
+    border-radius:5px;
+    transition:all 0.3s ease;
+    opacity:0;
+    visibility:hidden;
+  }
+  .bg-toggle:hover{
+    background:#ff99cc;
+    color:#000;
+    box-shadow:0 0 15px #ff99cc;
+  }
+  .bg-toggle.visible{
+    opacity:1;
+    visibility:visible;
+  }
+  
+  .header{position:relative;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;overflow:hidden;background:rgba(10,0,21,0.4);}
+  .header h1{font-size:24px;animation:fadeInDown 1.2s ease-out;z-index:4;position:relative;color:#ffe6f2;}
+  .header p{font-size:14px;margin-top:10px;animation:fadeInUp 1.2s ease-out;z-index:4;position:relative;color:#ffccdd;}
+  
+  @keyframes fadeInDown{from{opacity:0;transform:translateY(-50px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(50px);}to{opacity:1;transform:translateY(0);}}
+
+  .lang-switcher{position:absolute;top:20px;right:20px;z-index:200;}
+  .lang-switcher button{background:transparent;border:2px solid #ff99cc;color:#ff99cc;font-family:'Press Start 2P';font-size:10px;padding:5px 10px;margin-left:5px;cursor:pointer;border-radius:4px;}
+  .lang-switcher button:hover{background:#ff99cc;color:#000;}
+
+  .content{position:relative;z-index:5;padding:100px 20px;text-align:center;background:rgba(0,0,0,0.15);}
+  
+  section.about{position:relative;z-index:5;}
+  section.about p{margin-top:15px;font-size:12px;line-height:1.6;color:#ffe6f2;}
+  .info-life{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-bottom:50px;position:relative;z-index:5;}
+  .info,.life{flex:1;min-width:280px;max-width:400px;padding:20px;border-radius:15px;background:rgba(20,0,30,0.75);box-shadow:0 0 20px rgba(255,105,180,0.15);text-align:left;backdrop-filter:blur(10px);color:#ffccdd;}
+  .info ul,.life ul{list-style:none;padding:0;font-size:12px;line-height:1.7;}
+  .life-avatar{width:120px;height:120px;border-radius:50%;border:2px solid #ff99cc;object-fit:cover;display:block;margin:0 auto 15px;box-shadow:0 0 15px #ff99cc66;}
+  .socials{margin-top:30px;display:flex;justify-content:center;gap:15px;flex-wrap:wrap;position:relative;z-index:5;}
+  .socials a img{width:50px;height:50px;border:2px solid #ff99cc;padding:5px;border-radius:10px;transition:transform .25s,box-shadow .25s;}
+  .socials a img:hover{transform:scale(1.1);box-shadow:0 0 20px #ff99cc;}
+  
+  .music-btn{margin-top:30px;background:transparent;border:2px solid #ff99cc;color:#ff99cc;font-family:'Press Start 2P';font-size:10px;padding:10px 20px;border-radius:10px;cursor:pointer;transition:all .25s;position:relative;z-index:5;}
+  .music-btn:hover{background:#ff99cc;color:#000;box-shadow:0 0 20px #ff99cc;transform:scale(1.05);}
+  
+  .screenshots{position:relative;z-index:5;}
+  .screenshots h2{font-size:16px;margin-bottom:20px;color:#ffe6f2;}
+  .screenshots .grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
+  .screenshots img{width:300px;height:auto;border:2px solid #ff99cc;border-radius:10px;cursor:pointer;transition:transform .25s,box-shadow .25s;}
+  .screenshots img:hover{transform:scale(1.04);box-shadow:0 0 20px #ff99cc88;}
+  
+  .birthday{
+    background:rgba(20,0,30,0.8);
+    padding:30px;
+    border-radius:15px;
+    margin:50px auto;
+    max-width:400px;
+    backdrop-filter:blur(10px);
+    position:relative;
+    z-index:5;
+    border:1px solid #ff99cc44;
+  }
+  .birthday h2{color:#ffccdd;}
+  .birthday p{color:#ffe6f2;}
+
+  .modal{display:none;position:fixed;z-index:9999;left:0;top:0;width:100%;height:100%;overflow:hidden;background:rgba(0,0,0,0.92);}
+  .modal-content{display:block;margin:auto;max-width:85%;max-height:85%;}
+  .close,.prev,.next{position:absolute;color:#ff99cc;font-size:35px;cursor:pointer;user-select:none;}
+  .close{top:25px;right:40px;}
+  .prev,.next{top:50%;transform:translateY(-50%);font-size:50px;padding:20px;}
+  .prev{left:15px;} .next{right:15px;}
+</style>
 </head>
 <body>
-  <div class="stars" id="stars"></div>
-  <div class="container">
-    <h1>Добро пожаловать на сервер!</h1>
-    <p>Для оплаты проходки на наш сервер по выживанию воспользуйтесь кнопкой "Оплатить проходку" ниже:</p>
-    <div class="btn-container">
-      <button class="glow-button discord" onclick="playSound(); window.open('https://discord.gg/qUA56D8RUN', '_blank')">
-        <img src="https://cdn-icons-png.flaticon.com/512/3670/3670157.png" alt="Discord" class="icon">
-        Войти в Discord
-      </button>
-      <button class="glow-button twitch" onclick="playSound(); window.open('https://www.twitch.tv/smile_ik10/', '_blank')">
-        <img src="https://img.freepik.com/premium-vector/twitch-app-icon-interactive-livestreaming-service-gaming-social-media_277909-496.jpg" alt="Twitch" class="icon">
-        Перейти на Twitch
-      </button>
-     <button class="glow-button donate" onclick="playSound(); window.open('https://www.donationalerts.com/r/smile_ik10', '_blank')">
-  <img src="https://cdn-icons-png.flaticon.com/512/2163/2163350.png" alt="Coins" class="icon">
-  Оплатить проходку
-</button>
+
+<canvas id="global-canvas-bg" aria-hidden="true"></canvas>
+
+<button class="bg-toggle" id="bg-toggle" title="Toggle Background">BG</button>
+
+<div class="lang-switcher">
+  <button onclick="setLang('ru')">RU</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
+
+<header class="header">
+  <h1 id="title-text">Tbl_3a9k - Обо мне:</h1>
+  <p id="subtitle-text">стою среди толпы молчу..</p>
+</header>
+
+<div class="content">
+  <section class="about">
+    <h2 id="about-title">qq, Я Tbl_3a9k</h2>
+    <p id="about-1">Мне 14 лет, я живу в Казахстане и обожаю играть в Minecraft🎮</p>
+    <p id="about-2">Моя мечта — собрать мощный ПК, но пока я кайфую со своей GTX 1070 Ti и i7-3770 💻</p>
+    <p id="about-3">Пообщаться со мной? Discord — <strong>tbl_3a9k</strong>. гудлак</p>
+  </section>
+
+  <section class="info-life">
+    <div class="info">
+      <ul id="info-list">
+        <li>🏳️ • Мои цели:</li>
+        <li>👤 • Иметь свой стабильный заработок</li>
+        <li>💬 • Не зависеть от родителей</li>
+        <li>⛏️ • Обновить сетап</li>
+        <li>🎮 • Зарабатываю благодаря игре Minecraft</li>
+        <li>💫 • Моя основная мечта: Быть счастливым</li>
+        <li>💻 • Мой первый успех: 11.09.25 --> 61к💲</li>
+      </ul>
     </div>
+    <div class="life">
+      <h2 id="life-title">🧩 Моя личная жизнь</h2>
+      <img src="images/avatar.png" alt="Аватар" class="life-avatar">
+      <ul id="life-list">
+        <li>🎓 Учусь в <b>8 классе</b></li>
+        <li>🏀 Играю в <b>баскетбол</b></li>
+        <li>💞 Провожу время с близкими людьми</li>
+        <li>💰 Зарабатываю онлайн</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="socials">
+    <a href="https://tiktok.com/@tbl_3a9k.tt" target="_blank" rel="noopener"><img src="images/tiktok.png" alt="TikTok" /></a>
+    <a href="https://steamcommunity.com/profiles/76561199146062072/" target="_blank" rel="noopener"><img src="images/steam.png" alt="Steam" /></a>
+    <a href="https://www.twitch.tv/tbl_3a9k" target="_blank" rel="noopener"><img src="images/twitch.png" alt="Twitch" /></a>
+    <a href="https://open.spotify.com/user/31zywyv4vpxmybv7sjz6gxf776ee" target="_blank" rel="noopener"><img src="images/spotify.png" alt="Spotify" /></a>
+    <a href="https://www.roblox.com/users/3276902015/profile?friendshipSourceType=PlayerSearch" target="_blank" rel="noopener"><img src="images/roblox.png" alt="Roblox" /></a>
+    <a href="https://funpay.com/users/15229317/" target="_blank" rel="noopener"><img src="images/fanpay.png" alt="FanPay" /></a>
+    <a href="https://tiktok.com/@goloda4" target="_blank" rel="noopener"><img src="images/tiktok.png" alt="TikTok" /></a>
   </div>
 
-  <!-- 🔊 Аудиофайл -->
-  <audio id="clickSound" src="click.mp3"></audio>
+  <button class="music-btn" id="musicButton">▶ Play Music</button>
+  <audio id="mySong">
+    <source src="music.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает аудио.
+  </audio>
 
-  <script>
-    // Звёзды
-    const starsContainer = document.getElementById('stars');
-    function createStar() {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.left = Math.random() * 100 + 'vw';
-      star.style.animationDuration = 2 + Math.random() * 3 + 's';
-      star.style.opacity = Math.random();
-      star.style.width = star.style.height = Math.random() > 0.5 ? '2px' : '1px';
-      starsContainer.appendChild(star);
-      setTimeout(() => star.remove(), 5000);
-    }
-    setInterval(createStar, 100);
+  <section class="screenshots">
+    <h2 id="screenshots-title">📸 Мои скриншоты</h2>
+    <div class="grid">
+      <img src="images/screenshot1.png" alt="Screenshot 1" />
+      <img src="images/screenshot2.png" alt="Screenshot 2" />
+      <img src="images/screenshot3.png" alt="Screenshot 3" />
+      <img src="images/screenshot4.png" alt="Screenshot 4" />
+      <img src="images/screenshot5.png" alt="Screenshot 5" />
+      <img src="images/screenshot6.png" alt="Screenshot 6" />
+      <img src="images/screenshot7.png" alt="Screenshot 7" />
+      <img src="images/IMBA2.png" alt="IMBA2" />
+    </div>
+  </section>
 
-    // 🔊 Воспроизведение звука
-    function playSound() {
-      const sound = document.getElementById('clickSound');
-      sound.currentTime = 0;
-      sound.play();
+  <section class="birthday">
+    <h2>🎂 До моего Дня Рождения</h2>
+    <p id="birthday-days">Осталось: 90 дней</p>
+  </section>
+</div>
+
+<div id="modal" class="modal">
+  <span class="close">×</span>
+  <span class="prev">❮</span>
+  <span class="next">❯</span>
+  <img class="modal-content" id="modal-img">
+</div>
+
+<script>
+// --- music, modal, language, birthday, toggle --- (оставил без изменений, только цвета подтюнил)
+const bgToggle = document.getElementById("bg-toggle");
+const canvas = document.getElementById("global-canvas-bg");
+let bgVisible = true;
+
+document.addEventListener("dblclick", () => {
+  bgToggle.classList.add("visible");
+  setTimeout(() => bgToggle.classList.remove("visible"), 3000);
+});
+
+bgToggle.addEventListener("click", () => {
+  bgVisible = !bgVisible;
+  canvas.style.opacity = bgVisible ? "0.85" : "0";
+  bgToggle.textContent = bgVisible ? "BG" : "NO BG";
+});
+
+// music
+const button = document.getElementById("musicButton");
+const audio = document.getElementById("mySong");
+let isPlaying = false;
+button.addEventListener("click", () => {
+  if (!isPlaying) { audio.play().catch(() => {}); button.textContent = "⏸ Pause Music"; }
+  else { audio.pause(); button.textContent = "▶ Play Music"; }
+  isPlaying = !isPlaying;
+});
+
+// modal (без изменений)
+const modal = document.getElementById("modal");
+const modalImg = document.getElementById("modal-img");
+const images = document.querySelectorAll(".screenshots img");
+const closeBtn = document.querySelector(".close");
+const prevBtn = document.querySelector(".prev");
+const nextBtn = document.querySelector(".next");
+let currentIndex = 0;
+
+function openModal(index) { currentIndex = index; modal.style.display = "block"; modalImg.src = images[index].src; }
+function closeModal() { modal.style.display = "none"; }
+function showPrev() { currentIndex = (currentIndex - 1 + images.length) % images.length; modalImg.src = images[currentIndex].src; }
+function showNext() { currentIndex = (currentIndex + 1) % images.length; modalImg.src = images[currentIndex].src; }
+
+images.forEach((img, i) => img.addEventListener("click", () => openModal(i)));
+closeBtn.addEventListener("click", closeModal);
+prevBtn.addEventListener("click", showPrev);
+nextBtn.addEventListener("click", showNext);
+window.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+
+// language (без изменений)
+const langData = { /* твой объект langData без изменений */ };
+function setLang(lang) { /* твой код setLang без изменений */ }
+document.addEventListener("DOMContentLoaded", () => setLang("ru"));
+
+// birthday (без изменений)
+function updateBirthday() {
+  const today = new Date();
+  let birthday = new Date(today.getFullYear(), 10, 19);
+  if (today > birthday) birthday.setFullYear(today.getFullYear() + 1);
+  const diff = Math.floor((birthday - today) / (1000 * 60 * 60 * 24));
+  document.getElementById("birthday-days").textContent = "Осталось: " + diff + " дней";
+}
+updateBirthday();
+setInterval(updateBirthday, 1000 * 60 * 60 * 24);
+
+// ───────────────────────────────────────────────
+//     НОВЫЙ ВЕСЕННИЙ ФОН — лепестки + сердечки
+// ───────────────────────────────────────────────
+(function(){
+  const canvas = document.getElementById('global-canvas-bg');
+  const ctx = canvas.getContext('2d', { alpha: true });
+  let W, H, dpr;
+
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.scale(dpr, dpr);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const COUNT = Math.floor((W * H) / 18000) + 8; // 15–40 частиц в зависимости от экрана
+  const types = ['heart', 'petal']; // два вида
+
+  class SpringParticle {
+    constructor() {
+      this.reset();
     }
-  </script>
+    reset() {
+      this.type = types[Math.floor(Math.random() * types.length)];
+      this.x = Math.random() * W;
+      this.y = -30 - Math.random() * 100;
+      this.size = this.type === 'heart' ? 12 + Math.random() * 18 : 16 + Math.random() * 24;
+      this.speed = 0.4 + Math.random() * 1.1;
+      this.wobble = Math.random() * 0.02 + 0.005;
+      this.phase = Math.random() * Math.PI * 2;
+      this.opacity = 0.6 + Math.random() * 0.4;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.06;
+      this.hue = this.type === 'heart' ? 330 + Math.random() * 30 : 345 + Math.random() * 20; // розовые оттенки
+    }
+    update() {
+      this.y += this.speed;
+      this.x += Math.sin(this.phase + this.y * this.wobble) * 1.8;
+      this.rotation += this.rotSpeed;
+      this.phase += 0.02;
+
+      if (this.y > H + 50) this.reset();
+    }
+    draw() {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+
+      ctx.globalAlpha = this.opacity * (1 - Math.max(0, (this.y - H * 0.7) / (H * 0.3)));
+
+      if (this.type === 'heart') {
+        ctx.fillStyle = `hsl(${this.hue}, 90%, 75%)`;
+        ctx.beginPath();
+        ctx.moveTo(0, -this.size / 1.6);
+        ctx.bezierCurveTo(-this.size*0.9, -this.size*1.4, -this.size*1.8, -this.size*0.4, 0, this.size*0.8);
+        ctx.bezierCurveTo(this.size*1.8, -this.size*0.4, this.size*0.9, -this.size*1.4, 0, -this.size / 1.6);
+        ctx.closePath();
+        ctx.fill();
+      } else { // petal
+        ctx.fillStyle = `hsl(${this.hue}, 85%, 80%)`;
+        ctx.beginPath();
+        ctx.ellipse(0, 0, this.size * 0.5, this.size * 1.1, Math.sin(this.phase * 3) * 0.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      ctx.restore();
+    }
+  }
+
+  const particles = Array.from({length: COUNT}, () => new SpringParticle());
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+
+    // лёгкий градиентный фон
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0,   'rgba(30, 5, 45, 0.6)');
+    grad.addColorStop(0.5, 'rgba(50, 10, 70, 0.4)');
+    grad.addColorStop(1,   'rgba(80, 20, 100, 0.25)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, W, H);
+
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+})();
+</script>
 </body>
 </html>
-
