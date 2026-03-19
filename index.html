@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <style>
   *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
-  body{font-family:'Press Start 2P',cursive;background:#000;color:#fff;overflow-x:hidden;position:relative;min-height:100vh;}
+  body{font-family:'Press Start 2P',cursive;background:#000 url('images/image.png') center/cover fixed;color:#fff;overflow-x:hidden;position:relative;min-height:100vh;}
   
   /* Global animated background - covers entire site */
   #global-canvas-bg{
@@ -50,7 +50,7 @@
     visibility:visible;
   }
   
-  .header{position:relative;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;overflow:hidden;background:rgba(0,0,0,0.3);}
+  .header{position:relative;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;overflow:hidden;background:rgba(0,0,0,0.4);}
   .header h1{font-size:24px;animation:fadeInDown 1.2s ease-out;z-index:4;position:relative;}
   .header p{font-size:14px;margin-top:10px;animation:fadeInUp 1.2s ease-out;z-index:4;position:relative;}
   
@@ -63,7 +63,7 @@
   .lang-switcher button:hover{background:white;color:black;}
 
   /* content sections - positioned above animated background */
-  .content{position:relative;z-index:5;padding:100px 20px;text-align:center;background:rgba(0,0,0,0.1);}
+  .content{position:relative;z-index:5;padding:100px 20px;text-align:center;background:rgba(0,0,0,0.3);}
 
   /* site blocks */
   section.about{position:relative;z-index:5;}
