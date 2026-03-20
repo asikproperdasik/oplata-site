@@ -9,10 +9,18 @@
 <style>
   *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
   body{font-family:'Press Start 2P',cursive;background:#0a0005;color:#fff;overflow-x:hidden;position:relative;min-height:100vh;}
+  /* Dark overlay behind all content so text stays readable over particles */
+  .content::before{
+    content:'';
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(5,0,10,0.55);
+    z-index:-1;
+    pointer-events:none;
+  }
 
   #global-canvas-bg{
     position:fixed;top:0;left:0;width:100vw;height:100vh;
-    z-index:2;pointer-events:none;transition:opacity 0.5s ease;
+    z-index:0;pointer-events:none;transition:opacity 0.5s ease;
   }
 
   .bg-toggle{
@@ -42,8 +50,7 @@
   .header p{font-size:16px;margin-top:14px;animation:fadeInUp 1.2s ease-out;z-index:4;position:relative;
     font-family:'Playfair Display', serif; font-style:italic; letter-spacing:1px;
     text-shadow:0 0 12px rgba(255,182,193,0.6);}
-  /* canvas sits above header overlay but below text */
-  #global-canvas-bg{ z-index:2; }
+  /* header text above overlay */
 
   @keyframes fadeInDown{from{opacity:0;transform:translateY(-40px);}to{opacity:1;transform:translateY(0);}}
   @keyframes fadeInUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
@@ -57,12 +64,11 @@
   .lang-switcher button:hover{background:#ffb6c1;color:#000;box-shadow:0 0 10px rgba(255,182,193,0.7);}
 
   .emoji-divider{
-    position:relative;z-index:10;
+    position:relative;z-index:1;
     display:flex;justify-content:center;align-items:center;
     gap:18px;flex-wrap:wrap;
     padding:12px 20px;
-    background:rgba(0,0,0,0.35);
-    backdrop-filter:blur(4px);
+    background:transparent;
   }
   .emoji-divider span{
     font-size:18px;
@@ -87,7 +93,7 @@
     50%{transform:translateY(-5px);}
   }
 
-  .content{position:relative;z-index:10;padding:100px 20px;text-align:center;background:rgba(0,0,0,0.25);}
+  .content{position:relative;z-index:1;padding:100px 20px;text-align:center;background:transparent;}
 
   section.about h2{text-shadow:0 0 18px rgba(255,105,180,0.9), 0 0 35px rgba(255,182,193,0.5), 0 0 60px rgba(255,105,180,0.2);}
   section.about{position:relative;z-index:5;}
