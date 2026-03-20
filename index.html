@@ -455,7 +455,7 @@
       this.w = rand(5, 15);
       this.h = rand(7, 18);
       this.x = rand(0, W);
-      this.y = initial ? rand(0, H) : rand(-40, -5);
+      this.y = initial ? rand(0, H) : -this.h * 2;
       this.z = rand(0.3, 1.7);
       this.vy = rand(0.45, 1.4) * this.z;
       this.vx = rand(-0.4, 0.4);
@@ -477,7 +477,8 @@
         const dx = mouse.x - this.x, dy = mouse.y - this.y, d2 = dx*dx + dy*dy;
         if (d2 < 30000) { const f = (30000 - d2) / 30000; this.x -= dx * f * 0.028; this.y -= dy * f * 0.018; }
       }
-      if (this.y > H + 30) this.init(false);
+      // wrap Y: when off bottom, respawn at top
+      if (this.y > H + 30) { this.x = rand(0, W); this.y = -this.h * 2; }
       if (this.x < -60) this.x = W + 60;
       if (this.x > W + 60) this.x = -60;
     }
@@ -513,7 +514,7 @@
     init(initial = false) {
       this.size = rand(4, 13);   // small!
       this.x = rand(0, W);
-      this.y = initial ? rand(0, H) : rand(-30, -5);
+      this.y = initial ? rand(0, H) : -this.size * 2;
       this.z = rand(0.5, 1.6);
       this.vy = rand(0.35, 1.0) * this.z;
       this.vx = rand(-0.4, 0.4);
@@ -537,7 +538,7 @@
         const dx = mouse.x - this.x, dy = mouse.y - this.y, d2 = dx*dx + dy*dy;
         if (d2 < 26000) { const f = (26000 - d2) / 26000; this.x -= dx * f * 0.032; this.y -= dy * f * 0.025; }
       }
-      if (this.y > H + 20) this.init(false);
+      if (this.y > H + 20) { this.x = rand(0, W); this.y = -this.size * 2; }
       if (this.x < -40) this.x = W + 40;
       if (this.x > W + 40) this.x = -40;
     }
@@ -562,7 +563,7 @@
     constructor() { this.init(true); }
     init(initial = false) {
       this.x = rand(0, W);
-      this.y = initial ? rand(0, H) : rand(-20, -5);
+      this.y = initial ? rand(0, H) : -10;
       this.r = rand(1.2, 4.0);
       this.z = rand(0.4, 1.6);
       this.vy = rand(0.25, 0.85) * this.z;
@@ -580,7 +581,7 @@
       this.swayP += this.swayS;
       this.y += this.vy;
       this.x += this.vx + Math.sin(this.swayP) * 0.5;
-      if (this.y > H + 15) this.init(false);
+      if (this.y > H + 15) { this.x = rand(0, W); this.y = -10; }
       if (this.x < -20) this.x = W + 20;
       if (this.x > W + 20) this.x = -20;
     }
