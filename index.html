@@ -11,8 +11,8 @@
   body{font-family:'Press Start 2P',cursive;background:#0a0005;color:#fff;overflow-x:hidden;position:relative;min-height:100vh;}
 
   #global-canvas-bg{
-    position:fixed;top:0;left:0;width:100%;height:100vh;
-    z-index:1;pointer-events:none;transition:opacity 0.5s ease;
+    position:fixed;top:0;left:0;width:100vw;height:100vh;
+    z-index:2;pointer-events:none;transition:opacity 0.5s ease;
   }
 
   .bg-toggle{
@@ -57,7 +57,7 @@
   .lang-switcher button:hover{background:#ffb6c1;color:#000;box-shadow:0 0 10px rgba(255,182,193,0.7);}
 
   .emoji-divider{
-    position:relative;z-index:5;
+    position:relative;z-index:10;
     display:flex;justify-content:center;align-items:center;
     gap:18px;flex-wrap:wrap;
     padding:12px 20px;
@@ -87,7 +87,7 @@
     50%{transform:translateY(-5px);}
   }
 
-  .content{position:relative;z-index:5;padding:100px 20px;text-align:center;background:rgba(0,0,0,0.25);}
+  .content{position:relative;z-index:10;padding:100px 20px;text-align:center;background:rgba(0,0,0,0.25);}
 
   section.about h2{text-shadow:0 0 18px rgba(255,105,180,0.9), 0 0 35px rgba(255,182,193,0.5), 0 0 60px rgba(255,105,180,0.2);}
   section.about{position:relative;z-index:5;}
@@ -455,7 +455,7 @@
       this.w = rand(5, 15);
       this.h = rand(7, 18);
       this.x = rand(0, W);
-      this.y = initial ? rand(-H, H * 0.5) : rand(-40, -5);
+      this.y = initial ? rand(0, H) : rand(-40, -5);
       this.z = rand(0.3, 1.7);
       this.vy = rand(0.45, 1.4) * this.z;
       this.vx = rand(-0.4, 0.4);
@@ -513,7 +513,7 @@
     init(initial = false) {
       this.size = rand(4, 13);   // small!
       this.x = rand(0, W);
-      this.y = initial ? rand(-H, H * 0.5) : rand(-30, -5);
+      this.y = initial ? rand(0, H) : rand(-30, -5);
       this.z = rand(0.5, 1.6);
       this.vy = rand(0.35, 1.0) * this.z;
       this.vx = rand(-0.4, 0.4);
